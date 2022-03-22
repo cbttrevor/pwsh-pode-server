@@ -1,6 +1,8 @@
 Start-PodeServer -ScriptBlock {
   Add-PodeEndpoint -Address 0.0.0.0 -Port 34002 -Protocol Http
 
+  New-PodeLoggingMethod -File -Path podelog -Name filelogger | Enable-PodeRequestLogging
+
   Add-PodeRoute -Method Get -Path / -ScriptBlock {
     # Generate a random page background color as hex values
     $Values = 1..6 | ForEach-Object -Process { 
