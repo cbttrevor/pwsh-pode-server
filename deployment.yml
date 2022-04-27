@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pod-server
+  name: pode-server
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: pod-server
+      app: pode-server
   template:
     metadata:
       labels:
-        app: pod-server
+        app: pode-server
     spec:
       containers:
-      - name: pod-server
+      - name: pode-server
         image: trevorsullivan/pwsh-pode
         resources:
           limits:
