@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pode-server
+spec:
+  selector:
+    app: pode-server
+  ports:
+  - port: 80
+    targetPort: 80
