@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/powershell:latest
 
 WORKDIR /app
 
-SHELL ["pwsh", "-Command"]
+SHELL ["/opt/microsoft/powershell/7/pwsh", "-Command"]
 
 RUN Install-Module -Name Pode -Force
 
