@@ -1,5 +1,5 @@
 Start-PodeServer -ScriptBlock {
-  Add-PodeEndpoint -Address 0.0.0.0 -Port 34002 -Protocol Http
+  Add-PodeEndpoint -Address 0.0.0.0 -Port 34003 -Protocol Http
 
   New-PodeLoggingMethod -File -Path podelog -Name filelogger | Enable-PodeRequestLogging
 
