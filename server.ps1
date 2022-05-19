@@ -12,4 +12,10 @@ Start-PodeServer -ScriptBlock {
     $ResultString = '<html><body style="background-color: #{0}"><h1>Welcome to PowerShell Pode</h1><p>My runspace ID is {1}</p></body></html>' -f $BackgroundColor, $Host.Runspace.InstanceId.Guid
     Write-PodeHtmlResponse -Value $ResultString
   }
+  
+  Add-PodeRoute -Method Get -Path /random-errors -ScriptBlock {
+    $RandomValue = Get-Random -max 10 -SetSeed (Get-Date).Ticks.ToString().SubString(9,9)
+    $StatusCode = $RandomValue -gt 2 ? 500 : 200
+    Write-PodeJsonResponse @{ x = $RandomValue } -StatusCode $StatusCode
+  }
 }
