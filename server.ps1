@@ -16,6 +16,6 @@ Start-PodeServer -ScriptBlock {
   Add-PodeRoute -Method Get -Path /random-errors -ScriptBlock {
     $RandomValue = Get-Random -max 10 -SetSeed (Get-Date).Ticks.ToString().SubString(9,9)
     $StatusCode = $RandomValue -gt 2 ? 500 : 200
-    Write-PodeJsonResponse @{ x = $RandomValue } -StatusCode $StatusCode
+    Write-PodeJsonResponse -Value @{ x = $RandomValue } -StatusCode $StatusCode
   }
 }
