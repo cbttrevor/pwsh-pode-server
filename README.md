@@ -5,5 +5,33 @@ The Pode server has file-based logging enabled, so that a logging agent can pick
 
 ### HTTP Routes
 
-`GET /random-errors` - simulates HTTP 500 Internal Server Errors for a web application
-`GET /` - home page
+- `GET /random-errors` - simulates HTTP 500 Internal Server Errors for a web application
+- `GET /` - home page with random background color. Also prints the PowerShell runspace ID, so you can determine if load balancing is working correctly
+
+
+### Kubernetes Deployment
+
+```powershell
+@'
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: pwsh-pode
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pwsh-pode
+  template:
+    metadata:
+      labels:
+        app: pwsh-pode
+    spec:
+      containers:
+      - name: pwsh
+        image: trevorsullivan/pwsh-pode
+        ports:
+        - containerPort: 34003
+          protocol: TCP
+'@ | kubectl apply --filename -
+```
