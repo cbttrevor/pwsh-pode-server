@@ -33,5 +33,19 @@ spec:
         ports:
         - containerPort: 34003
           protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: pwsh-pode
+spec:
+  ports:
+  - name: pwsh-pode
+    port: 80
+    targetPort: 34003
+    protocol: TCP
+  selector:
+    app: pwsh-pode
+  type: ClusterIP
 '@ | kubectl apply --filename -
 ```
